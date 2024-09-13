@@ -1,0 +1,75 @@
+{
+  "build": {
+    "beforeBuildCommand": "cd benben-clock & npm run build",
+    "beforeDevCommand": "cd benben-clock & npm run dev",
+    "devPath": "../benben-clock/dist",
+    "distDir": "../benben-clock/dist"
+  },
+  "package": {
+    "productName": "tomato-clock",
+    "version": "0.1.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "fs": {
+        "scope": ["./.benben/*"]
+      }
+    },
+    "bundle": {
+      "active": true,
+      "category": "DeveloperTool",
+      "copyright": "",
+      "deb": {
+        "depends": []
+      },
+      "resources": [
+        ".benben/local_db.ddl"
+      ],
+      "externalBin": [],
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "identifier": "com.benben.willing",
+      "longDescription": "",
+      "macOS": {
+        "entitlements": null,
+        "exceptionDomain": "",
+        "frameworks": [],
+        "providerShortName": null,
+        "signingIdentity": null
+      },
+      "shortDescription": "",
+      "targets": "all",
+      "windows": {
+        "wix": {
+          "language": "zh-CN"
+        },
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": "",
+        "webviewInstallMode": {
+          "type": "offlineInstaller"
+        }
+      }
+    },
+    "security": {
+      "csp": null
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "fullscreen": false,
+        "height": 800,
+        "resizable": false,
+        "title": "benben",
+        "width": 500
+      }
+    ]
+  }
+}
