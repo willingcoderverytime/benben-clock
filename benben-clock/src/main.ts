@@ -11,7 +11,7 @@ app.use(Antd);
 app.use(store);
 app.mount("#app");
 
-const disableRefresh = () => {
+/* const disableRefresh = () => {
   document.addEventListener("keydown", function (event) {
     if (
       event.key === "F5" ||
@@ -27,3 +27,4 @@ const disableRefresh = () => {
 };
 
 disableRefresh();
+ */

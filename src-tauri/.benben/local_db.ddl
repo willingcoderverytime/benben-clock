@@ -11,3 +11,13 @@ CREATE TABLE 'task_info' (
   'StartTime' INTEGER NOT NULL,
   'CashTomato' INTEGER
 );
+
+
+CREATE TABLE 'long_term_goals' (
+  'Id' INTEGER PRIMARY KEY AUTOINCREMENT,
+  'No' TEXT NOT NULL,
+  'Name' TEXT NOT NULL,
+  'Desc' TEXT NOT NULL,
+  'CashTomato' INTEGER,
+  'StartTime' INTEGER NOT NULL
+);

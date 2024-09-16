@@ -39,6 +39,9 @@ async fn main() {
             crate::handler::task_cmd::query_task,
             crate::handler::task_cmd::query_task_statics,
             crate::handler::task_cmd::add_tomato_task,
+            crate::handler::goals_cmd::add_goals,
+            crate::handler::goals_cmd::query_goals,
+            crate::handler::goals_cmd::query_goals_detail,
         ])
         .run(generate_context!("tauri.conf.json"))
         .expect("error while running tauri application");

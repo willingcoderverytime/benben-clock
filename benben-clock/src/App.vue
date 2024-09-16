@@ -46,9 +46,9 @@ import TaskList from './cpn/TaskList.vue';
 import TaskStatics from './cpn/TaskStatics.vue';
 import type { TaskInfoDTO } from './dto';
 import { StopOutlined, StarOutlined } from '@ant-design/icons-vue';
-
 import { storeToRefs } from 'pinia';
-
+const useTaskStores = taskStores();
+const { runTask } = storeToRefs(useTaskStores);
 const timeLeft = ref(25 * 60);
 const timer = ref<number | null>(null);
 
@@ -74,8 +74,7 @@ const resetTimer = () => {
 
 const minutes = computed(() => Math.floor(timeLeft.value / 60).toString().padStart(2, '0'));
 const seconds = computed(() => (timeLeft.value % 60).toString().padStart(2, '0'));
-const useTaskStores = taskStores();
-const { runTask } = storeToRefs(useTaskStores);
+
 const stopTask = async () => {
   if (runTask && runTask.value) {
     await useTaskStores.controlRunTask(runTask?.value as TaskInfoDTO, "2");
@@ -105,7 +104,7 @@ watch(
           timeLeft.value = 25 * 60;
         }
       }
-    } else if(newTask) {
+    } else if (newTask) {
       timeLeft.value = 25 * 60;
       startTimer();
     }
