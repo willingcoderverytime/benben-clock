@@ -3,3 +3,5 @@
 /target/
 /.benben/local_db.db
 /Cargo.lock
+/logs/
+/.idea/
