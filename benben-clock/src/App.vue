@@ -1,5 +1,5 @@
 <template>
-  <div class="mian_div">
+  <div class="mian_div" >
     <div class="time_box">
       <TaskStatics></TaskStatics>
       <div>
@@ -17,6 +17,7 @@
           <StopOutlined />
           暂停任务
         </a-button>
+        <audio ref="audioPlayer" src="./assets/luomi.flac" style="padding: 50,50;"></audio>
         <a-button v-if="useTaskStores.runTask?.status === '2'" shape="round" type="primary"
           :style="{ background: 'rgb(0, 100, 200,0.5)' }" @click="resTartTask">
           <StarOutlined />
@@ -33,6 +34,7 @@
       <Suspense>
         <TaskList></TaskList>
       </Suspense>
+
     </div>
   </div>
 </template>
@@ -47,10 +49,27 @@ import TaskStatics from './cpn/TaskStatics.vue';
 import type { TaskInfoDTO } from './dto';
 import { StopOutlined, StarOutlined } from '@ant-design/icons-vue';
 import { storeToRefs } from 'pinia';
+import {start_music,stop_music} from './invoke/ring';
+
+
+
 const useTaskStores = taskStores();
 const { runTask } = storeToRefs(useTaskStores);
-const timeLeft = ref(25 * 60);
+const long_time = 20;
+const timeLeft = ref(long_time);
 const timer = ref<number | null>(null);
+
+
+
+
+
+
+
+const playSound =  () => {
+   start_music().then();
+};
+
+
 
 
 // 暂停逻辑要补强
@@ -61,8 +80,11 @@ const startTimer = () => {
       timeLeft.value--;
     } else {
       resetTimer();
-      timeLeft.value = 25 * 60;
+      timeLeft.value = long_time;
       useTaskStores.addCashOneTomato();
+      stopTask().then(() => {
+        playSound();
+      });
     }
   }, 1000);
 };
@@ -70,7 +92,6 @@ const startTimer = () => {
 const resetTimer = () => {
   clearInterval(timer.value as number);
 };
-
 
 const minutes = computed(() => Math.floor(timeLeft.value / 60).toString().padStart(2, '0'));
 const seconds = computed(() => (timeLeft.value % 60).toString().padStart(2, '0'));
@@ -101,11 +122,11 @@ watch(
           resetTimer();
         } else if (newTask.status === '3' || newTask.status === '4') {
           resetTimer();
-          timeLeft.value = 25 * 60;
+          timeLeft.value = long_time;
         }
       }
     } else if (newTask) {
-      timeLeft.value = 25 * 60;
+      timeLeft.value = long_time;
       startTimer();
     }
   },

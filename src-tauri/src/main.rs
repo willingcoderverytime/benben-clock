@@ -42,6 +42,8 @@ async fn main() {
             crate::handler::goals_cmd::add_goals,
             crate::handler::goals_cmd::query_goals,
             crate::handler::goals_cmd::query_goals_detail,
+            crate::handler::ring_cmd::stop_music,
+            crate::handler::ring_cmd::start_music,
         ])
         .run(generate_context!("tauri.conf.json"))
         .expect("error while running tauri application");

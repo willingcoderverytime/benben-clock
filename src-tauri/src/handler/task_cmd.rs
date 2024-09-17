@@ -127,7 +127,7 @@ pub(crate) async fn add_tomato_task(no: String) {
     use crate::entity::task::Column;
     let condition = Condition::all().add(Column::No.eq(no));
     let option = Entity::find().filter(condition.clone()).one(get_db().expect(format!("获取db失败！").as_str())).await.unwrap().unwrap();
-    let new_count = &option.cash_tomato.unwrap() + 1;
+    let new_count = &option.cash_tomato.unwrap_or_else(||0) + 1;
     let mut model = option.into_active_model();
     model.status = Set("2".to_owned());
     model.cash_tomato = Set(Some(new_count));

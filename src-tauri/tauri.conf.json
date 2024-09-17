@@ -2,7 +2,7 @@
   "build": {
     "beforeBuildCommand": "cd benben-clock & npm run build",
     "beforeDevCommand": "cd benben-clock & npm run dev",
-    "devPath": "../benben-clock/dist",
+    "devPath": "http://localhost:5173/",
     "distDir": "../benben-clock/dist"
   },
   "package": {
@@ -23,7 +23,8 @@
         "depends": []
       },
       "resources": [
-        ".benben/local_db.ddl"
+        ".benben/local_db.ddl",
+        ".benben/ring.mp3"
       ],
       "externalBin": [],
       "icon": [
