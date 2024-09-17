@@ -55,22 +55,13 @@ import {start_music,stop_music} from './invoke/ring';
 
 const useTaskStores = taskStores();
 const { runTask } = storeToRefs(useTaskStores);
-const long_time = 20;
+const long_time = 25*60;
 const timeLeft = ref(long_time);
 const timer = ref<number | null>(null);
-
-
-
-
-
-
 
 const playSound =  () => {
    start_music().then();
 };
-
-
-
 
 // 暂停逻辑要补强
 const startTimer = () => {
