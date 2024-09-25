@@ -8,7 +8,7 @@ use std::fs;
 use std::fs::File;
 use std::time::Duration;
 
-use sea_orm::{ConnectionTrait, ConnectOptions, Database, DatabaseConnection};
+use sea_orm::{ConnectionTrait, ConnectOptions, Database, DatabaseConnection, DbErr, ExecResult};
 use crate::config::config::{ConfigStruct, InitConfig};
 
 
@@ -102,6 +102,29 @@ async fn init_local_db() -> DatabaseConnection {
             panic!("数据库脚本执行失败")
         });
         tracing::info!("数据库脚本执行成功");
+    }else{
+        // update ddl
+        let mut _path: std::path::PathBuf = std::env::current_dir().unwrap();
+        _path.push(".benben\\update.ddl");
+        let result = match tokio::fs::read_to_string(_path.clone()).await {
+            Ok(resutl) => {resutl}
+            Err(_) => {
+                "".to_string()
+            }
+        };
+        if !result.is_empty() {
+            match local_db.execute_unprepared(result.as_str()).await {
+                Ok(_) => {}
+                Err(_) => {
+                }
+            };
+            match fs::remove_file(_path) {
+                Ok(()) => tracing::info!("文件删除成功"),
+                Err(e) => tracing::error!("删除文件时出错: {}", e),
+            }
+            tracing::info!("数据库脚本执行成功");
+        }
+
     }
     local_db
 }

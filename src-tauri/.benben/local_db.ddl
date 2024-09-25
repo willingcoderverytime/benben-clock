@@ -21,3 +21,10 @@ CREATE TABLE 'long_term_goals' (
   'CashTomato' INTEGER,
   'StartTime' INTEGER NOT NULL
 );
+
+CREATE TABLE 'to_do_list' (
+  'Id' INTEGER PRIMARY KEY AUTOINCREMENT,
+  'No' TEXT NOT NULL,
+  'Name' TEXT NOT NULL,
+  'Desc' TEXT NOT NULL
+);

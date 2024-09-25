@@ -4,3 +4,6 @@
 ## 技术栈
 js + rust-tauri + sea-orm 一个纯粹简单的桌面应用程序。
 
+## future
+- 新增todolist工程.
+

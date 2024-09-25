@@ -186,7 +186,7 @@ pub(crate) async fn rest_yesterday_task() {
     let today = crate::util::time_util::get_today_time_stamp();
     let start = today - (24 * 3600);
     let condition1 = Condition::all()
-        .add(Column::StartTime.eq(start))
+        .add(Column::StartTime.lte(start))
         .add(Column::Status.is_not_in(vec!["3", "4"]));
     /*    let tasks = Entity::find().filter(condition1).all().await.unwrap_or_else(|e| {
             println!("{:?}", e);

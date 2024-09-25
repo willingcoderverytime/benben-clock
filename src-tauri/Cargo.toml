@@ -27,6 +27,7 @@ tracing-subscriber = { version = "^0.3.18", default-features = false, features =
 tracing-appender = "^0.2.3"
 rodio = "^0.19.0"
 lazy_static = "1.5.0"
+log = "0.4.22"
 [dependencies.sea-orm]
 features = ["debug-print", "sqlx-sqlite", "runtime-tokio-native-tls"]
 version = "^1.1.0-rc.1" # sea-orm version
